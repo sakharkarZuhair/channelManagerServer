@@ -5,7 +5,8 @@ const router = express.Router();
 
 const parser = new xml2js.Parser();
 
-router.get("/", async (req, res) => {
+// Property Data of Seven Days With All Rooms
+router.get("/propertyData", async (req, res) => {
   const response = await fetch(
     "https://sandbox-distribution-xml.agoda.com/api?apiKey=110d2bdc-1a7d-479f-8822-2f5d096afb79",
     {
@@ -28,52 +29,52 @@ router.get("/", async (req, res) => {
   });
 });
 
-// router.get("/getSelectedBookings", async (req, res) => {
-//   const response = await fetch(
-//     "https://sandbox-distribution-xml.agoda.com/api?apiKey=110d2bdc-1a7d-479f-8822-2f5d096afb79",
-//     {
-//       method: "post",
-//       body: `
-//     <request timestamp="1436931804" type="3">
+// Single RoomID Data Without RatePlan ID
+router.get("/notRatePlans", async (req, res) => {
+  const response = await fetch(
+    "https://sandbox-distribution-xml.agoda.com/api?apiKey=110d2bdc-1a7d-479f-8822-2f5d096afb79",
+    {
+      method: "post",
+      body: `<request timestamp="1436931804" type="11">
 
-//        <criteria from="2022-08-01T00:00:00+07:00" to="2022-08-10T00:00:00+07:00" status="AmendBooking">
+        <criteria from="2022-08-10" to="2022-08-16">
+       
+         <property id="263492" room_id="3046309" />
+       
+        </criteria>
+       
+       </request>`,
+      headers: { "Content-Type": "text/xml; charset=utf-8" },
+    }
+  );
+  const data = await response.text();
+  parser.parseString(data, (err, result) => {
+    res.json(result);
+  });
+});
 
-//       <property id="263492"/>
+// Single Property > RoomID Data For 7 Days With RatePlan ID
+router.get("/singleProperty7DaysData", async (req, res) => {
+  const response = await fetch(
+    "https://sandbox-distribution-xml.agoda.com/api?apiKey=110d2bdc-1a7d-479f-8822-2f5d096afb79",
+    {
+      method: "post",
+      body: `<request timestamp="1436931804" type="11">
 
-//        </criteria>
-
-//     </request> `,
-//       headers: { "content-type": "text/xml; charset=utf-8" },
-//     }
-//   );
-//   const data = await response.text();
-//   parser.parseString(data, (err, result) => {
-//     res.json(result);
-//   });
-// });
-
-//   const currentTime = '1660044970777';
-
-// router.get("/getAllBookings", async (req, res) => {
-//   const response = await fetch(
-//     "https://sandbox-distribution-xml.agoda.com/api?apiKey=110d2bdc-1a7d-479f-8822-2f5d096afb79",
-//     {
-//       method: "post",
-//       body: `<?xml version="1.0" encoding="UTF-8"?>
-//     <request timestamp="1660038022528" type="9">
-
-//     <criteria from="2022-08-01T14:00:00+07:00" to="2022-08-01T15:00:00+07:00">
-
-//     </criteria>
-
-//     </request>`,
-//       headers: { "content-type": "text/xml; charset=utf-8" },
-//     }
-//   );
-//   const data = await response.text();
-//   parser.parseString(data, (err, result) => {
-//     res.json(result);
-//   });
-// });
+        <criteria from="2022-08-10" to="2022-08-16">
+       
+         <property id="263492" room_id="3046309" rateplan_id="3471717" />
+       
+        </criteria>
+       
+       </request>`,
+      headers: { "Content-Type": "text/xml; charset=utf-8" },
+    }
+  );
+  const data = await response.text();
+  parser.parseString(data, (err, result) => {
+    res.json(result);
+  });
+});
 
 export default router;

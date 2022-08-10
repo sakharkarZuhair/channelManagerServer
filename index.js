@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use("/", bookingsRoutes);
-app.use("/rates&Availibility", ratesAndAvailabilityRoutes);
+app.use("/", ratesAndAvailabilityRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
