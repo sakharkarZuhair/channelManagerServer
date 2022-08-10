@@ -1,8 +1,8 @@
 import express from 'express';
-const router = express.Router();
 import fetch from 'node-fetch';
 import xml2js from 'xml2js';
 
+const router = express.Router();
 const parser = new xml2js.Parser();
 
 router.get("/getSelectedBookings", async (req, res) => {
