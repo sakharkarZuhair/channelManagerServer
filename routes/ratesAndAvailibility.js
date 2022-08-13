@@ -48,6 +48,7 @@ const nextSevenDay = sevenDays.join("-");
 
 // Property Data of Seven Days With All Rooms
 // console.log(BASE_URL);
+// console.log(BASE_URL);
 
 router.get("/propertyData", async (req, res) => {
   // console.log(currDate, nextSevenDay);
