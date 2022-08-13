@@ -48,7 +48,7 @@ const nextSevenDay = sevenDays.join("-");
 
 // Property Data of Seven Days With All Rooms
 // console.log(BASE_URL);
-// console.log(BASE_URL);
+console.log(currDate, nextSevenDay);
 
 router.get("/propertyData", async (req, res) => {
   // console.log(currDate, nextSevenDay);
@@ -57,7 +57,7 @@ router.get("/propertyData", async (req, res) => {
     body: `
         <request timestamp="1436931804" type="11">
 
-          <criteria from='${currDate}' to='${nextSevenDay}'>
+          <criteria from='2022-08-13' to='2022-08-19'>
 
             <property id="5950804" />
 
@@ -78,7 +78,7 @@ router.get("/notRatePlans", async (req, res) => {
     method: "post",
     body: `<request timestamp="1436931804" type="11">
 
-        <criteria from='${currDate}' to='${nextSevenDay}'>
+        <criteria from='2022-08-13' to='2022-08-19'>
        
          <property id="5950804" room_id="109614900" />
        
@@ -99,7 +99,7 @@ router.get("/singleProperty7DaysData", async (req, res) => {
     method: "post",
     body: `<request timestamp="1436931804" type="11">
 
-        <criteria from='${currDate}' to='${nextSevenDay}'>
+        <criteria from='2022-08-13' to='2022-08-19'>
        
          <property id="5950804" room_id="109614900" rateplan_id="2377448" />
        
@@ -130,7 +130,7 @@ router.get("/setRatesAndAvailibility", async (req, res) => {
     
        <update room_id="109614900">
     
-        <date_range from='${currDate}' to='${nextSevenDay}'>
+        <date_range from='2022-08-13' to='2022-08-19'>
     
          <dow>1</dow>
     
@@ -168,7 +168,7 @@ router.get("/setRatesAndAvailibility", async (req, res) => {
     
        <update room_id="109614900" rateplan_id="2377448">
     
-        <date_range from='${currDate}' to='${nextSevenDay}'/>
+        <date_range from='2022-08-13' to='2022-08-19'/>
     
         <prices currency="EUR">
     
