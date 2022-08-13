@@ -26,6 +26,7 @@ router.get("/getAllBookings", async (req, res) => {
 });
 
 //   const currentTime = '1660044970777';
+//   const currentTime = '1660044970777';
 
 router.get("/getSelectedBookings", async (req, res) => {
   const response = await fetch(
