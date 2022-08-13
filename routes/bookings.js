@@ -6,8 +6,16 @@ const router = express.Router();
 const parser = new xml2js.Parser();
 
 router.get("/getAllBookings", async (req, res) => {
+  let xmlBody = {
+    request: {
+      criteria: ""
+    }
+  }
+  // console.log(process.env.BASE_URL)
+  // console.log(process.env.API_KEY)
   const response = await fetch(
-    "https://supply.agoda.com/api?apiKey=f9b88888-d34e-411a-a73b-685dfe28a9d0",
+    `${process.env.BASE_URL}${process.env.API_KEY}`,
+    // "https://supply.agoda.com/api?apiKey=f9b88888-d34e-411a-a73b-685dfe28a9d0",
     {
       method: "post",
       body: `<?xml version="1.0" encoding="UTF-8"?>
@@ -30,7 +38,8 @@ router.get("/getAllBookings", async (req, res) => {
 
 router.get("/getSelectedBookings", async (req, res) => {
   const response = await fetch(
-    "https://supply.agoda.com/api?apiKey=f9b88888-d34e-411a-a73b-685dfe28a9d0",
+    `${process.env.BASE_URL}${process.env.API_KEY}`,
+    // "https://supply.agoda.com/api?apiKey=f9b88888-d34e-411a-a73b-685dfe28a9d0",
     {
       method: "post",
       body: `<?xml version="1.0" encoding="UTF-8"?>
@@ -50,7 +59,8 @@ router.get("/getSelectedBookings", async (req, res) => {
 
 router.get("/getBookingsRetrieval", async (req, res) => {
   const response = await fetch(
-    "https://supply.agoda.com/api?apiKey=f9b88888-d34e-411a-a73b-685dfe28a9d0",
+    `${process.env.BASE_URL}${process.env.API_KEY}`,
+    // "https://supply.agoda.com/api?apiKey=f9b88888-d34e-411a-a73b-685dfe28a9d0",
     {
       method: "post",
       body: `<?xml version="1.0" encoding="UTF-8"?>
