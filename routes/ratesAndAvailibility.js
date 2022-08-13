@@ -1,9 +1,14 @@
 import express, { response } from "express";
 import fetch from "node-fetch";
 import xml2js from "xml2js";
-const router = express.Router();
+import dotenv from "dotenv";
 
+dotenv.config();
+const router = express.Router();
 const parser = new xml2js.Parser();
+
+const API_KEY = process.env.API_KEY;
+const BASE_URL = process.env.BASE_URL;
 
 //Current Date
 const currentDate = new Date().toLocaleDateString().split("/");
@@ -31,25 +36,35 @@ for (let i = 0; i < sevenDays.length; i++) {
 sevenDays.reverse();
 const nextSevenDay = sevenDays.join("-");
 
+// const xmldata = `<?xml version="1.0" encoding="UTF-8"?> <request timestamp="1436931804" type="11">
+
+// <criteria from='${currDate}' to='${nextSevenDay}'>
+
+//  <property id="5950804" />
+
+// </criteria>
+
+// </request>`;
+
 // Property Data of Seven Days With All Rooms
+// console.log(BASE_URL);
+
 router.get("/propertyData", async (req, res) => {
   // console.log(currDate, nextSevenDay);
-  const response = await fetch(
-    "https://supply.agoda.com/api?apiKey=f9b88888-d34e-411a-a73b-685dfe28a9d0",
-    {
-      method: "post",
-      body: `<request timestamp="1436931804" type="11">
+  const response = await fetch(`${BASE_URL}${API_KEY}`, {
+    method: "post",
+    body: `
+        <request timestamp="1436931804" type="11">
 
-        <criteria from='${currDate}' to='${nextSevenDay}'>
-       
-         <property id="5950804" />
-       
-        </criteria>
-       
-       </request>`,
-      headers: { "Content-Type": "text/xml; charset=utf-8" },
-    }
-  );
+          <criteria from='${currDate}' to='${nextSevenDay}'>
+
+            <property id="5950804" />
+
+          </criteria>
+
+        </request>`,
+    headers: { "Content-Type": "text/xml; charset=utf-8" },
+  });
   const data = await response.text();
   parser.parseString(data, (err, result) => {
     res.json(result);
@@ -58,11 +73,9 @@ router.get("/propertyData", async (req, res) => {
 
 // Single RoomID Data Without RatePlan ID
 router.get("/notRatePlans", async (req, res) => {
-  const response = await fetch(
-    "https://supply.agoda.com/api?apiKey=f9b88888-d34e-411a-a73b-685dfe28a9d0",
-    {
-      method: "post",
-      body: `<request timestamp="1436931804" type="11">
+  const response = await fetch(`${BASE_URL}${API_KEY}`, {
+    method: "post",
+    body: `<request timestamp="1436931804" type="11">
 
         <criteria from='${currDate}' to='${nextSevenDay}'>
        
@@ -71,9 +84,8 @@ router.get("/notRatePlans", async (req, res) => {
         </criteria>
        
        </request>`,
-      headers: { "Content-Type": "text/xml; charset=utf-8" },
-    }
-  );
+    headers: { "Content-Type": "text/xml; charset=utf-8" },
+  });
   const data = await response.text();
   parser.parseString(data, (err, result) => {
     res.json(result);
@@ -82,11 +94,9 @@ router.get("/notRatePlans", async (req, res) => {
 
 // Single Property > RoomID Data For 7 Days With RatePlan ID
 router.get("/singleProperty7DaysData", async (req, res) => {
-  const response = await fetch(
-    "https://supply.agoda.com/api?apiKey=f9b88888-d34e-411a-a73b-685dfe28a9d0",
-    {
-      method: "post",
-      body: `<request timestamp="1436931804" type="11">
+  const response = await fetch(`${BASE_URL}${API_KEY}`, {
+    method: "post",
+    body: `<request timestamp="1436931804" type="11">
 
         <criteria from='${currDate}' to='${nextSevenDay}'>
        
@@ -95,9 +105,8 @@ router.get("/singleProperty7DaysData", async (req, res) => {
         </criteria>
        
        </request>`,
-      headers: { "Content-Type": "text/xml; charset=utf-8" },
-    }
-  );
+    headers: { "Content-Type": "text/xml; charset=utf-8" },
+  });
   const data = await response.text();
   parser.parseString(data, (err, result) => {
     res.json(result);
@@ -106,17 +115,19 @@ router.get("/singleProperty7DaysData", async (req, res) => {
 
 // Set Rates And Availability Route
 router.get("/setRatesAndAvailibility", async (req, res) => {
+  // const propertyId = req.body.id
+
   const response = await fetch(
-    "https://sandbox-distribution-xml.agoda.com/api?apiKey=110d2bdc-1a7d-479f-8822-2f5d096afb79",
+    `https://supply.agoda.com/api?apiKey=f${API_KEY}`,
     {
       method: "post",
       body: `<request timestamp="1660276699" type="10">
 
-      <criteria property_id="263492">
+      <criteria property_id="5950804">
     
       <inventory>
     
-       <update room_id="3046309">
+       <update room_id="109614900">
     
         <date_range from='${currDate}' to='${nextSevenDay}'>
     
@@ -154,11 +165,11 @@ router.get("/setRatesAndAvailibility", async (req, res) => {
     
       <rate>
     
-       <update room_id="3046309" rateplan_id="3471717">
+       <update room_id="109614900" rateplan_id="2377448">
     
-        <date_range from='${currDate}' to='${nextSevenDay}'>
+        <date_range from='${currDate}' to='${nextSevenDay}'/>
     
-        <prices currency="USD">
+        <prices currency="EUR">
     
          <deviation base_price="4000.0">
     

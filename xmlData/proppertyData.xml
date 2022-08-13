@@ -1,0 +1,9 @@
+<request timestamp="1436931804" type="11">
+
+    <criteria from='${currDate}' to='${nextSevenDay}'>
+
+        <property id="5950804" />
+
+    </criteria>
+
+</request>
