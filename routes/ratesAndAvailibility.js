@@ -55,9 +55,9 @@ router.get("/propertyData", async (req, res) => {
   const response = await fetch(`${BASE_URL}${API_KEY}`, {
     method: "post",
     body: `
-        <request timestamp="1436931804" type="11">
+        <request timestamp="1660709664" type="11">
 
-          <criteria from='2022-08-13' to='2022-08-19'>
+          <criteria from='2022-08-17' to='2022-08-23'>
 
             <property id="5950804" />
 
@@ -78,7 +78,7 @@ router.get("/notRatePlans", async (req, res) => {
     method: "post",
     body: `<request timestamp="1436931804" type="11">
 
-        <criteria from='2022-08-13' to='2022-08-19'>
+        <criteria from='2022-08-17' to='2022-08-23'>
        
          <property id="5950804" room_id="109614900" />
        
@@ -99,7 +99,7 @@ router.get("/singleProperty7DaysData", async (req, res) => {
     method: "post",
     body: `<request timestamp="1436931804" type="11">
 
-        <criteria from='2022-08-13' to='2022-08-19'>
+        <criteria from='2022-08-17' to='2022-08-23'>
        
          <property id="5950804" room_id="109614900" rateplan_id="2377448" />
        
@@ -130,7 +130,7 @@ router.get("/setRatesAndAvailibility", async (req, res) => {
     
        <update room_id="109614900">
     
-        <date_range from='2022-08-13' to='2022-08-19'>
+        <date_range from='2022-08-17' to='2022-08-23'>
     
          <dow>1</dow>
     
@@ -168,7 +168,7 @@ router.get("/setRatesAndAvailibility", async (req, res) => {
     
        <update room_id="109614900" rateplan_id="2377448">
     
-        <date_range from='2022-08-13' to='2022-08-19'/>
+        <date_range from='2022-08-17' to='2022-08-23' />
     
         <prices currency="EUR">
     
