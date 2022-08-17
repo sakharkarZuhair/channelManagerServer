@@ -5,6 +5,7 @@ import cors from 'cors'
 import ratesAndAvailabilityRoutes from "./routes/ratesAndAvailibility.js";
 
 dotenv.config();
+//comment
 
 const app = express();
 
