@@ -48,24 +48,26 @@ const nextSevenDay = sevenDays.join("-");
 
 // Property Data of Seven Days With All Rooms
 // console.log(BASE_URL);
-console.log(currDate, nextSevenDay);
+// console.log(currDate, nextSevenDay);
 
 router.post("/propertyData", async (req, res) => {
-  let body = `
+  let bodyString = `
   <request timestamp="1660709664" type="11">
 
-    <criteria from='2022-08-22' to='2022-08-28'>
+    <criteria from='${req.body.fromDate}' to='${req.body.toDate}'>
 
       <property id='${req.body.id}' />
 
     </criteria>
 
   </request>`;
-  // console.log(body);
-  console.log(req.body.id);
+  // console.log(typeof req.body.fromDate);
+  // console.log(req.body.toDate);
+  // console.log(req.body.id);
+  // console.log(req.body.id);
   const response = await fetch(`${BASE_URL}${API_KEY}`, {
     method: "POST",
-    body: body,
+    body: bodyString,
     headers: { "Content-Type": "text/xml; charset=utf-8" },
   });
   const data = await response.text();
