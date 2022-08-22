@@ -50,20 +50,22 @@ const nextSevenDay = sevenDays.join("-");
 // console.log(BASE_URL);
 console.log(currDate, nextSevenDay);
 
-router.get("/propertyData", async (req, res) => {
-  // console.log(currDate, nextSevenDay);
+router.post("/propertyData", async (req, res) => {
+  let body = `
+  <request timestamp="1660709664" type="11">
+
+    <criteria from='2022-08-22' to='2022-08-28'>
+
+      <property id='${req.body.id}' />
+
+    </criteria>
+
+  </request>`;
+  // console.log(body);
+  console.log(req.body.id);
   const response = await fetch(`${BASE_URL}${API_KEY}`, {
-    method: "post",
-    body: `
-        <request timestamp="1660709664" type="11">
-
-          <criteria from='2022-08-17' to='2022-08-23'>
-
-            <property id="5950804" />
-
-          </criteria>
-
-        </request>`,
+    method: "POST",
+    body: body,
     headers: { "Content-Type": "text/xml; charset=utf-8" },
   });
   const data = await response.text();
@@ -78,7 +80,7 @@ router.get("/notRatePlans", async (req, res) => {
     method: "post",
     body: `<request timestamp="1436931804" type="11">
 
-        <criteria from='2022-08-17' to='2022-08-23'>
+        <criteria from='2022-08-22' to='2022-08-28'>
        
          <property id="5950804" room_id="109614900" />
        
@@ -99,7 +101,7 @@ router.get("/singleProperty7DaysData", async (req, res) => {
     method: "post",
     body: `<request timestamp="1436931804" type="11">
 
-        <criteria from='2022-08-17' to='2022-08-23'>
+        <criteria from='2022-08-22' to='2022-08-28'>
        
          <property id="5950804" room_id="109614900" rateplan_id="2377448" />
        
@@ -130,7 +132,7 @@ router.get("/setRatesAndAvailibility", async (req, res) => {
     
        <update room_id="109614900">
     
-        <date_range from='2022-08-17' to='2022-08-23'>
+        <date_range from='2022-08-22' to='2022-08-28'>
     
          <dow>1</dow>
     
@@ -168,7 +170,7 @@ router.get("/setRatesAndAvailibility", async (req, res) => {
     
        <update room_id="109614900" rateplan_id="2377448">
     
-        <date_range from='2022-08-17' to='2022-08-23' />
+        <date_range from='2022-08-22' to='2022-08-28' />
     
         <prices currency="EUR">
     

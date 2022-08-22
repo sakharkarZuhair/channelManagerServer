@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import bookingsRoutes from "./routes/bookings.js";
-import cors from 'cors'
+import cors from "cors";
 import ratesAndAvailabilityRoutes from "./routes/ratesAndAvailibility.js";
 
 dotenv.config();
@@ -10,6 +10,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
