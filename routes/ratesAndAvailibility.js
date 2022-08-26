@@ -36,20 +36,6 @@ for (let i = 0; i < sevenDays.length; i++) {
 sevenDays.reverse();
 const nextSevenDay = sevenDays.join("-");
 
-// const xmldata = `<?xml version="1.0" encoding="UTF-8"?> <request timestamp="1436931804" type="11">
-
-// <criteria from='${currDate}' to='${nextSevenDay}'>
-
-//  <property id="5950804" />
-
-// </criteria>
-
-// </request>`;
-
-// Property Data of Seven Days With All Rooms
-// console.log(BASE_URL);
-// console.log(currDate, nextSevenDay);
-
 router.post("/propertyData", async (req, res) => {
   let bodyString = `
   <request timestamp="1660709664" type="11">
